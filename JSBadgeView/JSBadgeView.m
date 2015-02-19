@@ -42,9 +42,9 @@
 #endif
 
 static const CGFloat JSBadgeViewShadowRadius = 1.0f;
-static const CGFloat JSBadgeViewHeight = 16.0f;
+static const CGFloat JSBadgeViewHeight = 24.0f;
 static const CGFloat JSBadgeViewTextSideMargin = 8.0f;
-static const CGFloat JSBadgeViewCornerRadius = 10.0f;
+static const CGFloat JSBadgeViewCornerRadius = 12.0f;
 
 // Thanks to Peter Steinberger: https://gist.github.com/steipete/6526860
 static BOOL JSBadgeViewIsUIKitFlatMode(void)
@@ -154,7 +154,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
     const CGFloat superviewWidth = superviewBounds.size.width;
     const CGFloat superviewHeight = superviewBounds.size.height;
     
-    newFrame.size.width = viewWidth;
+    newFrame.size.width = (viewWidth > viewHeight) ? viewWidth : viewHeight;
     newFrame.size.height = viewHeight;
     
     switch (self.badgeAlignment) {
@@ -195,7 +195,7 @@ static BOOL JSBadgeViewIsUIKitFlatMode(void)
             newFrame.origin.y = (superviewHeight - viewHeight) / 2.0f;
             break;
         default:
-            NSAssert(NO, @"Unimplemented JSBadgeAligment type %lul", (unsigned long)self.badgeAlignment);
+            NSAssert(NO, @"Unimplemented JSBadgeAligment type %lu", self.badgeAlignment);
     }
     
     newFrame.origin.x += _badgePositionAdjustment.x;
